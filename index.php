@@ -1,7 +1,7 @@
 <?php
-    $rede = "192.168.0."; # - Uma casa do IP, não digitar ex: 192.168.0.
-    $inicio = "2";        # - Início no IP 1
-    $fim = "10";          # - Termina no IP 255
+    $rede = "192.168.0."; # - Não digitar a ultima faixa do IP, ex: 192.168.0.
+    $inicio = "2";        # - Início do IP, ex: 1
+    $fim = "10";          # - Termino do IP, ex: 255
     $iplista = array(); 
     $resultados = [];
 
@@ -27,4 +27,28 @@
         }
         $resultados[] = $retval;
     }
+
+    # - Gerar tabela
+    echo "<table border = 1>
+    <tr>
+        <td>#</td>
+        <td>Descrição</td>
+        <td>IP/URL</td>
+        <td>Status</td>
+    </tr>";
+    
+    foreach($resultados as $item => $itens){
+        echo '<tr>';
+        echo '<td>'.$item.'</td>';
+        echo '<td>'.$iplista[$item][1].'</td>';
+        echo '<td>'.$iplista[$item][0].'</td>';
+        if ($resultados[$item] == 0){
+            echo '<td style=color:green><br/>On-line</td>';
+        }else{
+            echo '<td style=color:red><br/>Off-line</td>';
+        }
+        echo '</tr>';
+    }
+    echo '</table>';
+    echo header('refresh: 4');
 ?>
